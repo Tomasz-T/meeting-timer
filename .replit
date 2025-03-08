@@ -1,8 +1,8 @@
 run = "npm run dev"
-entrypoint = "src/meeting-timer.tsx"
+modules = ["nodejs-20", "web"]
 
 [nix]
-channel = "stable-22_11"
+channel = "stable-24_05"
 
 [env]
 PATH = "/home/runner/$REPL_SLUG/.config/npm/node_global/bin:/home/runner/$REPL_SLUG/node_modules/.bin"
@@ -20,4 +20,11 @@ pattern = "**/{*.js,*.jsx,*.ts,*.tsx}"
 syntax = "javascript"
 
 [languages.javascript.languageServer]
-start = [ "typescript-language-server", "--stdio" ] 
+start = ["typescript-language-server", "--stdio"]
+
+[deployment]
+run = ["sh", "-c", "npm run dev"]
+
+[[ports]]
+localPort = 5173
+externalPort = 80
