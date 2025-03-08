@@ -8,6 +8,6 @@ export default defineConfig({
     hmr: {
       clientPort: 443
     },
-    allowedHosts: ['*']
+    allowedHosts: ['*', 'c1c3f079-d171-45b5-b431-aad119954506-00-1pi05obdcz2kl.spock.replit.dev']
   }
 }) 
