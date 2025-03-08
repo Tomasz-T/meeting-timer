@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Clock, Users, PlayCircle, PauseCircle, RotateCcw, DollarSign } from 'lucide-react';
 
 const MeetingTimer = () => {
@@ -12,7 +12,7 @@ const MeetingTimer = () => {
   const [hourlyRate, setHourlyRate] = useState(50); // Default hourly rate
 
   // Format time in HH:MM:SS
-  const formatTime = (ms) => {
+  const formatTime = (ms: number) => {
     const totalSeconds = Math.floor(ms / 1000);
     const hours = Math.floor(totalSeconds / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
@@ -61,7 +61,7 @@ const MeetingTimer = () => {
   };
 
   // Update participants count
-  const updateParticipants = (delta) => {
+  const updateParticipants = (delta: number) => {
     const newCount = Math.max(1, participants + delta);
     
     // If timer is running, we need to capture the current elapsed time before changing speed
@@ -88,7 +88,7 @@ const MeetingTimer = () => {
   // Not using narrative anymore
 
   useEffect(() => {
-    let intervalId;
+    let intervalId: number | undefined;
     
     if (isRunning) {
       intervalId = setInterval(() => {
