@@ -7,8 +7,8 @@ const MeetingTimer = () => {
   const [participants, setParticipants] = useState(1);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [realElapsedTime, setRealElapsedTime] = useState(0);
-  const [startTime, setStartTime] = useState(null);
-  const [lastUpdateTime, setLastUpdateTime] = useState(null);
+  const [startTime, setStartTime] = useState<number | null>(null);
+  const [lastUpdateTime, setLastUpdateTime] = useState<number | null>(null);
   const [hourlyRate, setHourlyRate] = useState(50); // Default hourly rate
 
   // Format time in HH:MM:SS
@@ -103,10 +103,6 @@ const MeetingTimer = () => {
 
   return (
     <div className="flex flex-col items-center p-6 max-w-md mx-auto bg-white rounded-lg overflow-hidden font-sans">
-      <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=DM+Sans:wght@300;400&display=swap');
-      `}</style>
-      
       <h1 className="text-2xl font-bold mb-1 text-center flex items-center justify-center gap-2">
         <Clock size={28} className="text-blue-600" />
         MeetingMeter
