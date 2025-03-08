@@ -209,6 +209,16 @@ const MeetingTimer = () => {
           <RotateCcw size={28} color="#444" />
         </button>
       </div>
+      
+      {/* Buy Me a Coffee Link */}
+      <a 
+        href="https://www.buymeacoffee.com/tomaszte" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="mt-8 text-sm text-gray-500 hover:text-gray-700 flex items-center gap-2"
+      >
+        ☕ Buy me a coffee
+      </a>
     </div>
   );
 };
