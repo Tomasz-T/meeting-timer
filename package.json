@@ -2,7 +2,7 @@
   "name": "meeting-timer",
   "private": true,
   "version": "0.1.0",
-  "homepage": "https://Tomasz-T.github.io/meeting-timer",
+  "homepage": "https://tomasz-t.github.io/meeting-timer",
   "type": "module",
   "scripts": {
     "dev": "vite",
