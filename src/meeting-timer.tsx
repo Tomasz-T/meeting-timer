@@ -1,7 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Clock, Users, PlayCircle, PauseCircle, RotateCcw, DollarSign } from 'lucide-react';
+import { InfoTooltip } from './components/InfoTooltip';
+import { IntroScreens } from './components/IntroScreens';
 
 const MeetingTimer = () => {
+  const [showIntro, setShowIntro] = useState(true);
   const [activeTab, setActiveTab] = useState('basic'); // 'basic' or 'cost'
   const [isRunning, setIsRunning] = useState(false);
   const [participants, setParticipants] = useState(1);
@@ -85,8 +88,6 @@ const MeetingTimer = () => {
     return (hourlyRate * hours * participants).toFixed(2);
   };
 
-  // Not using narrative anymore
-
   useEffect(() => {
     let intervalId: number | undefined;
     
@@ -103,6 +104,13 @@ const MeetingTimer = () => {
 
   return (
     <div className="flex flex-col items-center p-6 max-w-md mx-auto bg-white rounded-lg overflow-hidden font-sans">
+      {showIntro && (
+        <IntroScreens
+          onComplete={() => setShowIntro(false)}
+          onSkip={() => setShowIntro(false)}
+        />
+      )}
+      
       <h1 className="text-2xl font-bold mb-1 text-center flex items-center justify-center gap-2">
         <Clock size={28} className="text-blue-600" />
         MeetingMeter
@@ -125,17 +133,39 @@ const MeetingTimer = () => {
         </button>
       </div>
       
-      <div className="w-full mb-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg space-y-4 flat">
-        <div className="text-6xl text-center mb-4 tracking-wider font-bold text-gray-800 font-timer">
-          {formatTime(elapsedTime)}
-        </div>
-        
-        <div className="text-center text-lg text-blue-600 mb-2">
-          Real time: <span className="font-timer font-bold">{calculateRealTime()}</span>
+      <div className="w-full mb-6 p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg">
+        {/* Main Timer Display */}
+        <div className="flex flex-col items-center max-w-sm mx-auto">
+          <div className="text-center mb-8">
+            <div className="text-xl font-semibold text-blue-600 mb-4">Adjusted Time</div>
+            <div className="text-5xl tracking-wider font-bold text-gray-800 font-timer mb-3">
+              {formatTime(elapsedTime)}
+            </div>
+            <div className="text-base text-gray-600">
+              ({participants}x real time)
+              <InfoTooltip
+                title="Understanding Time Rate"
+                content={
+                  <div className="space-y-2">
+                    <p>• Each participant multiplies the time rate</p>
+                    <p>• Example: 5 people = 5x faster</p>
+                    <p>• Helps visualize total time investment</p>
+                  </div>
+                }
+              />
+            </div>
+          </div>
+          
+          <div className="text-center w-full">
+            <div className="text-xl font-semibold text-blue-600 mb-4">Actual Time</div>
+            <div className="text-3xl tracking-wider font-medium text-gray-600 font-timer">
+              {calculateRealTime()}
+            </div>
+          </div>
         </div>
         
         {activeTab === 'cost' && (
-          <div className="text-center">
+          <div className="text-center border-t border-gray-200 pt-4 mt-8">
             <div className="text-lg text-green-600 font-bold flex items-center justify-center mb-2">
               <DollarSign size={20} />
               <span className="text-2xl">{calculateCost()}</span>
