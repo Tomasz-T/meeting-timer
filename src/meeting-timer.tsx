@@ -133,34 +133,39 @@ const MeetingTimer = () => {
         </button>
       </div>
       
-      <div className="w-full mb-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg space-y-4 flat">
-        <div className="text-6xl text-center mb-4 tracking-wider font-bold text-gray-800 font-timer">
-          {formatTime(elapsedTime)}
-        </div>
-        
-        <div className="text-center text-lg text-blue-600 mb-2">
-          Real time: <span className="font-timer font-bold">{calculateRealTime()}</span>
-        </div>
-        
-        <div className="text-center">
-          <div className="text-sm text-gray-600 bg-gray-50 border border-gray-200 rounded-md py-1 px-3 inline-block">
-            Current rate: <span className="font-semibold">{participants}x</span> real time
-            <InfoTooltip
-              title="Understanding Time Rate"
-              content={
-                <div className="space-y-2">
-                  <p>• Time counts faster with more participants</p>
-                  <p>• Rate shows current time acceleration</p>
-                  <p>• Example: 5 people = 5x faster</p>
-                  <p>• Helps visualize meeting impact</p>
-                </div>
-              }
-            />
+      <div className="w-full mb-6 p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg">
+        {/* Main Timer Display */}
+        <div className="flex flex-col items-center max-w-sm mx-auto">
+          <div className="text-center mb-8">
+            <div className="text-xl font-semibold text-blue-600 mb-4">Adjusted Time</div>
+            <div className="text-5xl tracking-wider font-bold text-gray-800 font-timer mb-3">
+              {formatTime(elapsedTime)}
+            </div>
+            <div className="text-base text-gray-600">
+              ({participants}x real time)
+              <InfoTooltip
+                title="Understanding Time Rate"
+                content={
+                  <div className="space-y-2">
+                    <p>• Each participant multiplies the time rate</p>
+                    <p>• Example: 5 people = 5x faster</p>
+                    <p>• Helps visualize total time investment</p>
+                  </div>
+                }
+              />
+            </div>
+          </div>
+          
+          <div className="text-center w-full">
+            <div className="text-xl font-semibold text-blue-600 mb-4">Actual Time</div>
+            <div className="text-3xl tracking-wider font-medium text-gray-600 font-timer">
+              {calculateRealTime()}
+            </div>
           </div>
         </div>
         
         {activeTab === 'cost' && (
-          <div className="text-center">
+          <div className="text-center border-t border-gray-200 pt-4 mt-8">
             <div className="text-lg text-green-600 font-bold flex items-center justify-center mb-2">
               <DollarSign size={20} />
               <span className="text-2xl">{calculateCost()}</span>
@@ -181,26 +186,9 @@ const MeetingTimer = () => {
       </div>
       
       <div className="flex flex-col items-center justify-center gap-4 mb-6 w-full">
-        <div className="w-full flex justify-between items-center">
-          <div className="text-xl font-bold text-center flex items-center gap-2">
-            <Users size={24} className="text-blue-600" />
-            Participants
-            <InfoTooltip
-              title="Understanding Participants"
-              content={
-                <div className="space-y-2">
-                  <p>• Each person accelerates time</p>
-                  <p>• More people = higher cost</p>
-                  <p>• Tracks combined time investment</p>
-                  <p>• Try different team sizes</p>
-                </div>
-              }
-            />
-          </div>
-          <div className="text-right">
-            <div className="text-sm text-orange-500 font-medium">Time Factor: {participants}x</div>
-            <div className="text-xs text-gray-600">Each participant adds 1x to time rate</div>
-          </div>
+        <div className="text-xl font-bold text-center flex items-center justify-center gap-2">
+          <Users size={24} className="text-blue-600" />
+          Participants
         </div>
         <div className="flex items-center justify-center gap-4">
           <button 
