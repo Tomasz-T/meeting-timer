@@ -1,7 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Clock, Users, PlayCircle, PauseCircle, RotateCcw, DollarSign } from 'lucide-react';
+import { InfoTooltip } from './components/InfoTooltip';
+import { IntroScreens } from './components/IntroScreens';
 
 const MeetingTimer = () => {
+  const [showIntro, setShowIntro] = useState(true);
   const [activeTab, setActiveTab] = useState('basic'); // 'basic' or 'cost'
   const [isRunning, setIsRunning] = useState(false);
   const [participants, setParticipants] = useState(1);
@@ -85,8 +88,6 @@ const MeetingTimer = () => {
     return (hourlyRate * hours * participants).toFixed(2);
   };
 
-  // Not using narrative anymore
-
   useEffect(() => {
     let intervalId: number | undefined;
     
@@ -103,6 +104,13 @@ const MeetingTimer = () => {
 
   return (
     <div className="flex flex-col items-center p-6 max-w-md mx-auto bg-white rounded-lg overflow-hidden font-sans">
+      {showIntro && (
+        <IntroScreens
+          onComplete={() => setShowIntro(false)}
+          onSkip={() => setShowIntro(false)}
+        />
+      )}
+      
       <h1 className="text-2xl font-bold mb-1 text-center flex items-center justify-center gap-2">
         <Clock size={28} className="text-blue-600" />
         MeetingMeter
@@ -134,6 +142,23 @@ const MeetingTimer = () => {
           Real time: <span className="font-timer font-bold">{calculateRealTime()}</span>
         </div>
         
+        <div className="text-center">
+          <div className="text-sm text-gray-600 bg-gray-50 border border-gray-200 rounded-md py-1 px-3 inline-block">
+            Current rate: <span className="font-semibold">{participants}x</span> real time
+            <InfoTooltip
+              title="Understanding Time Rate"
+              content={
+                <div className="space-y-2">
+                  <p>• Time counts faster with more participants</p>
+                  <p>• Rate shows current time acceleration</p>
+                  <p>• Example: 5 people = 5x faster</p>
+                  <p>• Helps visualize meeting impact</p>
+                </div>
+              }
+            />
+          </div>
+        </div>
+        
         {activeTab === 'cost' && (
           <div className="text-center">
             <div className="text-lg text-green-600 font-bold flex items-center justify-center mb-2">
@@ -156,9 +181,26 @@ const MeetingTimer = () => {
       </div>
       
       <div className="flex flex-col items-center justify-center gap-4 mb-6 w-full">
-        <div className="text-xl font-bold text-center flex items-center justify-center gap-2">
-          <Users size={24} className="text-blue-600" />
-          Participants
+        <div className="w-full flex justify-between items-center">
+          <div className="text-xl font-bold text-center flex items-center gap-2">
+            <Users size={24} className="text-blue-600" />
+            Participants
+            <InfoTooltip
+              title="Understanding Participants"
+              content={
+                <div className="space-y-2">
+                  <p>• Each person accelerates time</p>
+                  <p>• More people = higher cost</p>
+                  <p>• Tracks combined time investment</p>
+                  <p>• Try different team sizes</p>
+                </div>
+              }
+            />
+          </div>
+          <div className="text-right">
+            <div className="text-sm text-orange-500 font-medium">Time Factor: {participants}x</div>
+            <div className="text-xs text-gray-600">Each participant adds 1x to time rate</div>
+          </div>
         </div>
         <div className="flex items-center justify-center gap-4">
           <button 
