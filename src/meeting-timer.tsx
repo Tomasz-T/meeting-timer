@@ -135,13 +135,13 @@ const MeetingTimer = () => {
       
       <div className="w-full mb-6 p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg">
         {/* Main Timer Display */}
-        <div className="flex flex-col items-center max-w-sm mx-auto">
-          <div className="text-center mb-8">
-            <div className="text-xl font-semibold text-blue-600 mb-4">Adjusted Time</div>
-            <div className="text-5xl tracking-wider font-bold text-gray-800 font-timer mb-3">
+        <div className="flex flex-col items-center space-y-4">
+          <div className="text-center">
+            <div className="text-lg font-semibold text-blue-600 mb-1">Adjusted Time</div>
+            <div className="text-4xl tracking-wider font-bold text-gray-800 font-timer mb-1">
               {formatTime(elapsedTime)}
             </div>
-            <div className="text-base text-gray-600">
+            <div className="text-sm text-gray-600">
               ({participants}x real time)
               <InfoTooltip
                 title="Understanding Time Rate"
@@ -157,8 +157,8 @@ const MeetingTimer = () => {
           </div>
           
           <div className="text-center w-full">
-            <div className="text-xl font-semibold text-blue-600 mb-4">Actual Time</div>
-            <div className="text-3xl tracking-wider font-medium text-gray-600 font-timer">
+            <div className="text-lg font-semibold text-blue-600 mb-1">Actual Time</div>
+            <div className="text-2xl tracking-wider font-medium text-gray-600 font-timer">
               {calculateRealTime()}
             </div>
           </div>
