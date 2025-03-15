@@ -9,15 +9,15 @@ interface IntroScreensProps {
 const screens = [
   {
     title: "Welcome to MeetingMeter",
-    description: "The clock ticks differently when we gather. Let's see how it works.",
+    description: "A simple timer that shows how time adds up when multiple people are in a meeting.",
   },
   {
-    title: "Participant Impact",
-    description: "More participants = faster time counting. Each person multiplies the meeting time rate.",
+    title: "How It Works",
+    description: "The timer runs faster based on the number of participants. More people = faster time accumulation.",
   },
   {
-    title: "Real-time Calculation",
-    description: "Watch as the timer accelerates based on the number of participants. Try adding or removing people to see the effect.",
+    title: "Ready to Start",
+    description: "Add participants using + and - buttons, then press play to begin tracking meeting time.",
   }
 ];
 
